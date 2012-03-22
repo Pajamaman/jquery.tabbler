@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+	<head>
+		<title>jquery.tabbler</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="js/jquery.tabbler.js"></script>
+		<script>
+			$(function() {
+				$("#bobTab").tabbler({
+					target: "bobContent"
+				});
+				$("#dougTab").tabbler({
+					target: "dougContent"
+				});
+				$("#steveTab").tabbler({
+					target: "steveContent"
+				});
+			});
+		</script>
+		<style>
+			a,
+			.container
+			{
+				background-color: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<a id="bobTab" href="#">Bob</a>
+		<a id="dougTab" href="#">Doug</a>
+		<a id="steveTab" href="#">Steve</a>
+		<div class="container">
+			<div id="bobContent">
+				<h2>
+					Bob
+				</h2>
+				<p>
+					Lorizzle fizzle dolor the bizzle amizzle, consectetuer adipiscing things. Nullam sapizzle velit, mammasay mammasa mamma oo sa volutpizzle, yo mah nizzle, gravida vizzle, arcu.
+				</p>
+			</div>
+			<div id="dougContent">
+				<h2>
+					Doug
+				</h2>
+				<p>
+					Mammasay mammasa mamma oo sa check out this tortor. Sed eros. We gonna chung we gonna chung dolor dapibus turpizzle tempizzle go to hizzle.
+				</p>
+			</div>
+			<div id="steveContent">
+				<h2>
+					Steve
+				</h2>
+				<p>
+					Mauris crackalackin nibh et turpis. Tellivizzle izzle tortizzle. Pellentesque eleifend rhoncizzle shut the shizzle up. In own yo' habitasse platea dictumst.
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
