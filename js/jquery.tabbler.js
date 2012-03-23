@@ -36,9 +36,9 @@
 							$(e.srcElement).removeClass("active");
 						});
 					} else {
-						target.siblings(".tabbler .target").slideUp("fast");
-						target.siblings(".tabbler .target").promise().done(function() {
-							$(e.srcElement).siblings(".tabbler .tab").removeClass("active");
+						target.siblings(".tabbler.target").slideUp("fast");
+						target.siblings(".tabbler.target").promise().done(function() {
+							$(e.srcElement).siblings(".tabbler.tab").removeClass("active");
 							$(e.srcElement).addClass("active");
 							target.slideDown("fast");
 						});
