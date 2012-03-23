@@ -1,18 +1,28 @@
+.tabbler.tablist
+{
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-left: 0;
+}
 .tabbler.tab
 {
 	background-color: #ccc;
 	display: inline-block;
-	padding: 0.5em;
 }
 .tabbler.tab.active
 {
 	background-color: #ffc;
 }
-.tabbler.target
+.tabbler.tab a
+{
+	display: inline-block;
+	padding: 0.5em;
+}
+.tabbler.panel
 {
 	background-color: #ffc;
 }
-.tabbler.target.inner
+.tabbler.panel.inner
 {
 	padding: 1em;
 }

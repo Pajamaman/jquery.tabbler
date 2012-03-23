@@ -4,30 +4,39 @@
 
 ### Overview
 
-A tabbler is a link, called the tab, and a content area, called the target. Clicking on the tab toggles the visibility of the target, along with any sibling tabbler targets.
+A tabbler is a list of tabs that each correspond to a content area, called a panel. Clicking on a tab toggles the visibility of the corresponding panel, along with any sibling panels.
 
 The HTML should look something like this:
 
-    <a id="someTab">I'm a Tab</a>
-    <a id="anotherTab">I'm Another Tab</a>
-    <div id="someTarget">
-        I'm a Target
-    </div>
-    <div id="anotherTarget">
-        I'm Another Target
+    <div id="tabs">
+        <ul>
+            <li>
+                <a href="#tabs-1">Tab 1</a>
+            </li>
+            <li>
+                <a href="#tabs-2">Tab 2</a>
+            </li>
+            <li>
+                <a href="#tabs-3">Tab 3</a>
+            </li>
+        </ul>
+        <div id="tabs-1">
+            Blah blah blah...
+        </div>
+        <div id="tabs-2">
+            Blah blah blah...
+        </div>
+        <div id="tabs-3">
+            Blah blah blah...
+        </div>
     </div>
 
 A call to:
 
-    $("#someTab").tabbler({ target: "someTarget" });
+    $("#tabs").tabbler();
 
 will initialize a tabbler instance.
 
-### Options
-
-#### target - String - Default: null
-The id of the target that should be toggled when the tab is clicked.
-
 ### To do
 
-* Add alternative animation effects, such as slide in from the left or right, or fade in and out
+* Add alternate animation effects, such as slide in from the left or right, or fade in and out

@@ -4,42 +4,54 @@
 
 (function($) {
 	var methods = {
-		init: function(options) {
-			var settings = $.extend({
-				"target": "null"
-			}, options);
+		init: function() {
 			
 			return this.each(function() {
-				var target = $("#" + settings.target);
+				var $tabList = $(this).children("ul");
 				
-				target.addClass("tabbler target");
-				$(this).addClass("tabbler tab");
+				$tabList.addClass("tabbler tablist");
 				
-				// Wrap content of target in div to fix jumpy animation
-				target.wrapInner("<div class='tabbler target inner'>");
+				var $tabs = $tabList.children("li");
 				
-				// Get height of target
-				targetFontPx = target.css("font-size").replace("px", "");
+				$tabs.addClass("tabbler tab");
 				
-				// Convert height from pixels to em's to keep things nice and fluid
-				targetHeightPx = target.height();
-				targetHeightEm = targetHeightPx / targetFontPx;
+				var $panels = $tabs.children("a").map(function() {
+					var panelId = $(this).attr("href");
+					
+					return $(panelId).get();
+				});
 				
-				// Set height of target then hide it to fix jumpy animation
-				target.css("height", targetHeightEm + "em");
-				target.hide();
+				$panels.addClass("tabbler panel");
 				
-				$(this).click(function(e) {
-					if (target.is(":visible")) {
-						target.slideUp("fast", function() {
-							$(e.srcElement).removeClass("active");
+				$panels.each(function() {
+					// Wrap content of panel in a div to fix jumpy background 
+					$(this).wrapInner("<div class='tabbler panel inner'>");
+					
+					// Set height of panel in em's to keep things nice and fluid
+					var panelHeightPx = $(this).height();
+					var panelFontPx = $(this).css("font-size").replace("px", "");
+					var panelHeightEm = panelHeightPx / panelFontPx;
+					$(this).css("height", panelHeightEm + "em");
+					
+					// Hide panel after setting height to fix jumpy animation
+					$(this).hide();
+				});
+				
+				$tabs.click(function() {
+					var $tab = $(this);
+					var panelId = $(this).children("a").attr("href");
+					var $panel = $(panelId);
+					
+					if ($panel.is(":visible")) {
+						$panel.slideUp("fast", function() {
+							$tab.removeClass("active");
 						});
 					} else {
-						target.siblings(".tabbler.target").slideUp("fast");
-						target.siblings(".tabbler.target").promise().done(function() {
-							$(e.srcElement).siblings(".tabbler.tab").removeClass("active");
-							$(e.srcElement).addClass("active");
-							target.slideDown("fast");
+						$panel.siblings(".tabbler.panel").slideUp("fast");
+						$panel.siblings(".tabbler.panel").promise().done(function() {
+							$tab.siblings(".tabbler.tab").removeClass("active");
+							$tab.addClass("active");
+							$panel.slideDown("fast");
 						});
 					}
 				});
