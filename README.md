@@ -39,3 +39,9 @@ The id of the content area that should be toggled.
 ### Notice
 
 I recommend using [Eric Meyer's Reset CSS](http://meyerweb.com/eric/tools/css/reset) to fix the strange jQuery animation behavior. I've included it in the css directory for your convenience.
+
+### To do
+
+* Add open and close methods
+* Add alternative animation effects, such as slide in from the left or right, or fade in and out
+* Currently, it's necessary to separate the tabs from the targets by placing the targets in a div. This is because clicking on a tab opens the target and closes all of the target's siblings. This is obviously really stupid and I'd like to fix it as soon as I have the time.
