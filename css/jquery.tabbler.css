@@ -1,0 +1,18 @@
+.tabbler.tab
+{
+	background-color: #ccc;
+	display: inline-block;
+	padding: 0.5em;
+}
+.tabbler.tab.active
+{
+	background-color: #ffc;
+}
+.tabbler.target
+{
+	background-color: #ffc;
+}
+.tabbler.target.inner
+{
+	padding: 1em;
+}

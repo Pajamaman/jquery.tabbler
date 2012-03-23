@@ -7,17 +7,17 @@
 		<script>
 			$(function() {
 				$("#bobTab").tabbler({
-					target: "bobContent"
+					target: "bobTarget"
 				});
 				$("#dougTab").tabbler({
-					target: "dougContent"
+					target: "dougTarget"
 				});
 				$("#steveTab").tabbler({
-					target: "steveContent"
+					target: "steveTarget"
 				});
 			});
 		</script>
-		<link href="css/reset.css" rel="stylesheet" />
+		<link href="css/jquery.tabbler.css" rel="stylesheet" />
 		<style>
 			h1
 			{
@@ -26,11 +26,6 @@
 			h2
 			{
 				font-size: 1.75em;
-			}
-			a,
-			.container
-			{
-				background-color: #ccc;
 			}
 		</style>
 	</head>
@@ -41,31 +36,29 @@
 		<a id="bobTab" href="#">Bob</a>
 		<a id="dougTab" href="#">Doug</a>
 		<a id="steveTab" href="#">Steve</a>
-		<div class="container">
-			<div id="bobContent">
-				<h2>
-					Bob
-				</h2>
-				<p>
-					Lorizzle fizzle dolor the bizzle amizzle, consectetuer adipiscing things. Nullam sapizzle velit, mammasay mammasa mamma oo sa volutpizzle, yo mah nizzle, gravida vizzle, arcu.
-				</p>
-			</div>
-			<div id="dougContent">
-				<h2>
-					Doug
-				</h2>
-				<p>
-					Mammasay mammasa mamma oo sa check out this tortor. Sed eros. We gonna chung we gonna chung dolor dapibus turpizzle tempizzle go to hizzle.
-				</p>
-			</div>
-			<div id="steveContent">
-				<h2>
-					Steve
-				</h2>
-				<p>
-					Mauris crackalackin nibh et turpis. Tellivizzle izzle tortizzle. Pellentesque eleifend rhoncizzle shut the shizzle up. In own yo' habitasse platea dictumst.
-				</p>
-			</div>
+		<div id="bobTarget">
+			<h2>
+				Bob
+			</h2>
+			<p>
+				Lorizzle fizzle dolor the bizzle amizzle, consectetuer adipiscing things. Nullam sapizzle velit, mammasay mammasa mamma oo sa volutpizzle, yo mah nizzle, gravida vizzle, arcu.
+			</p>
+		</div>
+		<div id="dougTarget">
+			<h2>
+				Doug
+			</h2>
+			<p>
+				Mammasay mammasa mamma oo sa check out this tortor. Sed eros. We gonna chung we gonna chung dolor dapibus turpizzle tempizzle go to hizzle.
+			</p>
+		</div>
+		<div id="steveTarget">
+			<h2>
+				Steve
+			</h2>
+			<p>
+				Mauris crackalackin nibh et turpis. Tellivizzle izzle tortizzle. Pellentesque eleifend rhoncizzle shut the shizzle up. In own yo' habitasse platea dictumst.
+			</p>
 		</div>
 	</body>
 </html>

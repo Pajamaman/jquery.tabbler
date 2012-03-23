@@ -11,10 +11,18 @@
 			
 			return this.each(function() {
 				var target = $("#" + settings.target);
-				var siblings = target.siblings();
+				
+				target.addClass("tabbler target");
+				$(this).addClass("tabbler tab");
+				
+				// Wrap content of target in div set to display inline-block to fix jumpy animation
+				target.wrapInner("<div class='tabbler target inner'>");
+				target.children(":first").css("display", "inline-block");
 				
 				// Get height of target
 				targetFontPx = target.css("font-size").replace("px", "");
+				
+				// Convert height from pixels to em's to keep things nice and fluid
 				targetHeightPx = target.height();
 				targetHeightEm = targetHeightPx / targetFontPx;
 				
@@ -22,15 +30,18 @@
 				target.css("height", targetHeightEm + "em");
 				target.hide();
 				
-				$(this).click(function() {
+				$(this).click(function(e) {
 					if (target.is(":visible")) {
-						target.slideUp("fast");
-					} else if (siblings.filter(":visible").length != 0) {
-						siblings.filter(":visible").slideUp("fast", function() {
-							target.slideDown("fast");
+						target.slideUp("fast", function() {
+							$(e.srcElement).removeClass("active");
 						});
 					} else {
-						target.slideDown("fast");
+						target.siblings(".tabbler .target").slideUp("fast");
+						target.siblings(".tabbler .target").promise().done(function() {
+							$(e.srcElement).siblings(".tabbler .tab").removeClass("active");
+							$(e.srcElement).addClass("active");
+							target.slideDown("fast");
+						});
 					}
 				});
 			});
