@@ -15,9 +15,8 @@
 				target.addClass("tabbler target");
 				$(this).addClass("tabbler tab");
 				
-				// Wrap content of target in div set to display inline-block to fix jumpy animation
+				// Wrap content of target in div to fix jumpy animation
 				target.wrapInner("<div class='tabbler target inner'>");
-				target.children(":first").css("display", "inline-block");
 				
 				// Get height of target
 				targetFontPx = target.css("font-size").replace("px", "");
