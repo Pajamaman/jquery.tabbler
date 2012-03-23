@@ -11,16 +11,10 @@ The HTML should look something like this:
     <a id="someTab">I'm a Tab</a>
     <a id="anotherTab">I'm Another Tab</a>
     <div id="someTarget">
-        <p>I'm a Target</p>
-        <div>
-            Blah blah blah...
-        </div>
+        I'm a Target
     </div>
     <div id="anotherTarget">
-        <p>I'm Another Target</p>
-        <div>
-            Blah blah blah...
-        </div>
+        I'm Another Target
     </div>
 
 A call to:
