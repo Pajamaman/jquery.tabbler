@@ -38,4 +38,4 @@ The id of the content area that should be toggled.
 
 ### Notice
 
-I recommend using [Eric Meyer's Reset CSS](http://meyerweb.com/eric/tools/css/reset) to fix the strange jQuery animation behavior.
+I recommend using [Eric Meyer's Reset CSS](http://meyerweb.com/eric/tools/css/reset) to fix the strange jQuery animation behavior. I've included in the css directory for your convenience.
