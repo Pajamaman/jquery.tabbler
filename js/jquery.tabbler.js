@@ -21,21 +21,9 @@
 					return $(panelId).get();
 				});
 				
-				$panels.addClass("tabbler panel");
-				
-				$panels.each(function() {
-					// Wrap content of panel in a div to fix jumpy background 
-					$(this).wrapInner("<div class='tabbler panel inner'>");
-					
-					// Set height of panel in em's to keep things nice and fluid
-					var panelHeightPx = $(this).height();
-					var panelFontPx = $(this).css("font-size").replace("px", "");
-					var panelHeightEm = panelHeightPx / panelFontPx;
-					$(this).css("height", panelHeightEm + "em");
-					
-					// Hide panel after setting height to fix jumpy animation
-					$(this).hide();
-				});
+				$panels.addClass("tabbler panel")
+					.wrapInner("<div class='tabbler panel inner'>")
+					.hide();
 				
 				$tabs.click(function(e) {
 					e.preventDefault();
