@@ -37,7 +37,9 @@
 					$(this).hide();
 				});
 				
-				$tabs.click(function() {
+				$tabs.click(function(e) {
+					e.preventDefault();
+					
 					var $tab = $(this);
 					var panelId = $(this).children("a").attr("href");
 					var $panel = $(panelId);
