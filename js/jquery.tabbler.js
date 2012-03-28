@@ -5,7 +5,6 @@
 (function($) {
 	var methods = {
 		init: function() {
-			
 			return this.each(function() {
 				var $tabList = $(this).children("ul");
 				
