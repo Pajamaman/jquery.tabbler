@@ -8,10 +8,11 @@
 			$(function() {
 				$("#tabs").tabbler();
 				$("#more-tabs").tabbler({
-					panelId: "more-tabs-1"
+					setHeight: true,
+					panelId: "more-tabs-1",
+					effect: "horizontal"
 				});
 				$("#even-more-tabs").tabbler({
-					setHeight: true,
 					panelId: "even-more-tabs-1",
 					play: true,
 					playSpeed: 2000,
@@ -145,8 +146,5 @@
 				</p>
 			</div>
 		</div>
-		<p>
-			I don't move!
-		</p>
 	</body>
 </html>

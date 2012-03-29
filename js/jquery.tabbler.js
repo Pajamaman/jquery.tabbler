@@ -8,14 +8,15 @@
 			var settings = $.extend({
 				setHeight: false,
 				panelId: null,
+				effect: "vertical",
 				play: false,
 				playSpeed: 5000,
-				pauseHover: false,
-				effect: "vertical"
+				pauseHover: false
 			}, options);
 			
 			return this.each(function() {
-				var $tabbler = $(this).addClass("tabbler");
+				var $tabbler = $(this).addClass("tabbler")
+					.css("overflow", "hidden");
 				
 				var $tabList = $tabbler.children("ul").addClass("tabbler-tabList");
 				
@@ -32,6 +33,7 @@
 					});
 				
 				var $panels = $tabbler.children("div").addClass("tabbler-panel")
+					.css("position", "relative")
 					.wrapInner("<div class='tabbler-wrapper'>");
 				
 				if (settings.setHeight == true) {
@@ -48,11 +50,16 @@
 					var fontHeightPx = $(this).css("font-size").replace("px", "");
 					var maxHeightEm = maxHeightPx / fontHeightPx;
 					
-					$(this).css("height", maxHeightEm + "em");
+					$(this).height(maxHeightEm + "em");
 				}
 				
 				$tabs.has("a[href='#" + settings.panelId + "']").addClass("active");
-				$panels.not("#" + settings.panelId).hide();
+				
+				if (settings.effect == "vertical") {
+					$panels.not("#" + settings.panelId).hide();
+				} else if (settings.effect == "horizontal") {
+					$panels.not("#" + settings.panelId).hide().css("left", -$(this).outerWidth());
+				}
 				
 				if (settings.play == true) {
 					var interval = setInterval(function() {
@@ -96,7 +103,15 @@
 						effect: settings.effect
 					}, function() {
 						$tab.addClass("active");
-						$panel.slideDown("fast");
+						
+						if (settings.effect == "vertical") {
+							$panel.slideDown("fast");
+						} else if (settings.effect = "horizontal") {
+							$panel.show();
+							$panel.animate({
+								left: 0
+							});
+						}
 					});
 				}
 			});
@@ -111,13 +126,26 @@
 				
 				var $panel = $(this).find(".tabbler-panel:visible");
 				
-				$panel.slideUp("fast").promise().done(function() {
-					$tab.removeClass("active");
-					
-					if (typeof callback == "function") {
-						callback.call();
-					}
-				});
+				if (settings.effect == "vertical") {
+					$panel.slideUp("fast").promise().done(function() {
+						$tab.removeClass("active");
+						
+						if (typeof callback == "function") {
+							callback.call();
+						}
+					});
+				} else if (settings.effect == "horizontal") {
+					$panel.animate({
+						left: -$(this).outerWidth()
+					}).promise().done(function() {
+						$(this).hide();
+						$tab.removeClass("active");
+						
+						if (typeof callback == "function") {
+							callback.call();
+						}
+					});
+				}
 			});
 		},
 		nextTab: function(options) {
