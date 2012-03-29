@@ -108,7 +108,7 @@
 						
 						if (settings.effect == "vertical") {
 							$panel.slideDown("fast");
-						} else if (settings.effect = "horizontal" || settings.effect == "slide") {
+						} else if (settings.effect == "horizontal" || settings.effect == "slide") {
 							$panel.show();
 							$panel.animate({
 								left: 0
