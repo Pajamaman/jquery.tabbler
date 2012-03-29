@@ -63,9 +63,15 @@ Example:
 #### close - .tabbler("close")
 Closes the tabbler.
 
+Options:
+
+    There are no options for this method. It does however accept a callback function.
+
 Example:
 
-    $("#tabs").tabbler("close");
+    $("#tabs").tabbler("close", function() {
+        // Do something else
+    });
 
 ### To do
 
