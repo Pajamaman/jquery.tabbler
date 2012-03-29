@@ -114,5 +114,5 @@ Example:
 
 ### To do
 
-* Add alternate animation effects, such as slide in from the left or right, or fade in and out
+* Make slide effect continuous
 * Add prevTab() method

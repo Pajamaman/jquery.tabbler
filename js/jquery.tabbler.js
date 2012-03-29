@@ -59,6 +59,8 @@
 					$panels.not("#" + settings.panelId).hide();
 				} else if (settings.effect == "horizontal") {
 					$panels.not("#" + settings.panelId).hide().css("left", -$(this).outerWidth());
+				} else if (settings.effect == "slide") {
+					$panels.not("#" + settings.panelId).hide().css("left", $(this).outerWidth());
 				}
 				
 				if (settings.play == true) {
@@ -106,7 +108,7 @@
 						
 						if (settings.effect == "vertical") {
 							$panel.slideDown("fast");
-						} else if (settings.effect = "horizontal") {
+						} else if (settings.effect = "horizontal" || settings.effect == "slide") {
 							$panel.show();
 							$panel.animate({
 								left: 0
@@ -139,6 +141,17 @@
 						left: -$(this).outerWidth()
 					}).promise().done(function() {
 						$(this).hide();
+						$tab.removeClass("active");
+						
+						if (typeof callback == "function") {
+							callback.call();
+						}
+					});
+				} else if (settings.effect == "slide") {
+					$panel.animate({
+						left: -$(this).outerWidth()
+					}).promise().done(function() {
+						$(this).hide().css("left", $(this).outerWidth());
 						$tab.removeClass("active");
 						
 						if (typeof callback == "function") {
