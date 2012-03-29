@@ -39,6 +39,13 @@ will initialize a tabbler instance.
 
 ### Options
 
+#### setHeight - Boolean - Default: false
+Set whether or not the tabbler height should remain constant when it is opened or closed.
+
+Example:
+
+    $("#tabs").tabbler({ setHeight: true });
+
 #### panelId - String - Default: null
 Set whether or not the tabbler should open to the panel with the specified ID when the page loads.
 
@@ -51,14 +58,21 @@ Set whether or not the tabbler should automatically advance through the panels.
 
 Example:
 
-    $("#tabs").tabbler({ play: true });
+    $("#tabs").tabbler({ panelId: "tabs-1", play: true });
 
 #### playSpeed - Integer - Default: 5000
 Set the frequency that the tabbler should automatically advance through the panels when the play option is set to true.
 
 Example:
 
-    $("#tabs").tabbler({ play: true, playSpeed: 2000 });
+    $("#tabs").tabbler({ panelId: "tabs-1", play: true, playSpeed: 2000 });
+
+#### pauseHover - Boolean - Default: false
+Set whether or not the tabbler should pause when the mouse cursor hovers over it and the play option is set to true.
+
+Example:
+
+    $("#tabs").tabbler({ panelId: "tabs-1", play: true, pauseHover: true });
 
 ### Methods
 
@@ -84,22 +98,21 @@ Options:
 Example:
 
     $("#tabs").tabbler("close", function() {
-        // Do something else
+        // Callback
     });
 
-#### play - .tabbler("play")
-Causes the tabbler to automatically advance through the panels.
+#### nextTab - .tabbler("nextTab")
+Opens the tabbler to the first panel following the panel that is currently opened, or to the first panel in the tabbler if the panel that is currently opened is the last panel.
 
 Options:
 
-    playSpeed - Integer - Default: 5000
-    Set the frequency that the tabbler should automatically advance through the panels.
+    There are no options for this method.
 
 Example:
 
-    $("#tabs").tabbler("play", { playSpeed: 2000 });
+    $("#tabs").tabbler("nextTab");
 
 ### To do
 
 * Add alternate animation effects, such as slide in from the left or right, or fade in and out
-* Add methods to pause the play() method or to advance manually
+* Add prevTab() method

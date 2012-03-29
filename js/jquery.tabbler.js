@@ -6,9 +6,11 @@
 	var methods = {
 		init: function(options) {
 			var settings = $.extend({
+				setHeight: false,
 				panelId: null,
 				play: false,
-				playSpeed: 5000
+				playSpeed: 5000,
+				pauseHover: false
 			}, options);
 			
 			return this.each(function() {
@@ -18,7 +20,7 @@
 				
 				var $tabs = $tabList.children("li").addClass("tabbler tab");
 				
-				$tabs.children("a").addClass("tabbler tabLink")
+				var $tabLinks = $tabs.children("a").addClass("tabbler tabLink")
 					.click(function(e) {
 						e.preventDefault();
 						
@@ -28,19 +30,43 @@
 					});
 				
 				var $panels = $tabbler.children("div").addClass("tabbler panel")
-					.wrapInner("<div class='tabbler wrapper'>")
-					.hide();
+					.wrapInner("<div class='tabbler wrapper'>");
 				
-				if (settings.panelId != null) {
-					$tabbler.tabbler("open", {
-						panelId: settings.panelId
+				if (settings.setHeight != false) {
+					var tabListHeightPx = $tabList.height();
+					var maxPanelHeightPx = 0;
+					
+					$panels.each(function() {
+						if ($(this).height() > maxPanelHeightPx) {
+							maxPanelHeightPx = $(this).height();
+						}
 					});
+					
+					var maxHeightPx = tabListHeightPx + maxPanelHeightPx;
+					var fontHeightPx = $(this).css("font-size").replace("px", "");
+					var maxHeightEm = maxHeightPx / fontHeightPx;
+					
+					$(this).css("height", maxHeightEm + "em");
 				}
 				
+				$tabs.has("a[href='#" + settings.panelId + "']").addClass("active");
+				$panels.not("#" + settings.panelId).hide();
+				
 				if (settings.play != false) {
-					$tabbler.tabbler("play", {
-						playSpeed: settings.playSpeed
-					});
+					var interval = setInterval(function() {
+						$tabbler.tabbler("nextTab");
+					}, settings.playSpeed);
+					
+					if (settings.pauseHover != false) {
+						$tabbler.hover(function() {
+							clearInterval(interval);
+						},
+						function() {
+							interval = setInterval(function() {
+								$tabbler.tabbler("nextTab");
+							}, settings.playSpeed);
+						});
+					}
 				}
 			});
 		},
@@ -77,25 +103,17 @@
 				});
 			});
 		},
-		play: function(options) {
-			var settings = $.extend({
-				playSpeed: 5000
-			}, options);
-			
+		nextTab: function() {
 			return this.each(function() {
-				$tabbler = $(this);
+				var panelId = $(this).find(".tabbler.panel:visible").next().attr("id");
 				
-				var interval = setInterval(function() {
-					var panelId = $tabbler.find(".tabbler.panel:visible").next().attr("id");
-					
-					if (panelId == null) {
-						panelId = $tabbler.find(".tabbler.panel").first().attr("id");
-					}
-					
-					$tabbler.tabbler("open", {
-						panelId: panelId
-					});
-				}, settings.playSpeed);
+				if (panelId == null) {
+					panelId = $(this).find(".tabbler.panel").first().attr("id");
+				}
+				
+				$(this).tabbler("open", {
+					panelId: panelId
+				});
 			});
 		}
 	};
