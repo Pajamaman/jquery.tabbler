@@ -87,6 +87,18 @@ Example:
         // Do something else
     });
 
+#### play - .tabbler("play")
+Causes the tabbler to automatically advance through the panels.
+
+Options:
+
+    playSpeed - Integer - Default: 5000
+    Set the frequency that the tabbler should automatically advance through the panels.
+
+Example:
+
+    $("#tabs").tabbler("play", { playSpeed: 2000 });
+
 ### To do
 
 * Add alternate animation effects, such as slide in from the left or right, or fade in and out
