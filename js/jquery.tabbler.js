@@ -6,13 +6,15 @@
 	var methods = {
 		init: function(options) {
 			var settings = $.extend({
-				open: null
+				panelId: null,
+				play: false,
+				playSpeed: 5000
 			}, options);
 			
 			return this.each(function() {
 				var $tabbler = $(this);
 				
-				var $tabList = $tabbler.children("ul").first().addClass("tabbler tabList");
+				var $tabList = $tabbler.children("ul").addClass("tabbler tabList");
 				
 				var $tabs = $tabList.children("li").addClass("tabbler tab");
 				
@@ -29,16 +31,22 @@
 					.wrapInner("<div class='tabbler wrapper'>")
 					.hide();
 				
-				if (settings.open != null) {
+				if (settings.panelId != null) {
 					$tabbler.tabbler("open", {
-						panelId: settings.open
+						panelId: settings.panelId
+					});
+				}
+				
+				if (settings.play != false) {
+					$tabbler.tabbler("play", {
+						playSpeed: settings.playSpeed
 					});
 				}
 			});
 		},
 		open: function(options) {
 			var settings = $.extend({
-				panelId: null
+				panelId: $(this).find(".tabbler.panel").first().attr("id")
 			}, options);
 			
 			return this.each(function() {
@@ -67,6 +75,27 @@
 					
 					callback.call();
 				});
+			});
+		},
+		play: function(options) {
+			var settings = $.extend({
+				playSpeed: 5000
+			}, options);
+			
+			return this.each(function() {
+				$tabbler = $(this);
+				
+				var interval = setInterval(function() {
+					var panelId = $tabbler.find(".tabbler.panel:visible").next().attr("id");
+					
+					if (panelId == null) {
+						panelId = $tabbler.find(".tabbler.panel").first().attr("id");
+					}
+					
+					$tabbler.tabbler("open", {
+						panelId: panelId
+					});
+				}, settings.playSpeed);
 			});
 		}
 	};

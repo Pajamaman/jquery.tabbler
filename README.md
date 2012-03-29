@@ -39,12 +39,26 @@ will initialize a tabbler instance.
 
 ### Options
 
-#### open - String - Default: null
+#### panelId - String - Default: null
 Set whether or not the tabbler should open to the panel with the specified ID when the page loads.
 
 Example:
 
-    $("#tabs").tabbler({ open: "tabs-1" });
+    $("#tabs").tabbler({ panelId: "tabs-1" });
+
+#### play - Boolean - Default: false
+Set whether or not the tabbler should automatically advance through the panels.
+
+Example:
+
+    $("#tabs").tabbler({ play: true });
+
+#### playSpeed - Integer - Default: 5000
+Set the frequency that the tabbler should automatically advance through the panels when the play option is set to true.
+
+Example:
+
+    $("#tabs").tabbler({ play: true, playSpeed: 2000 });
 
 ### Methods
 
@@ -53,7 +67,7 @@ Opens the tabbler to the panel with the specified ID.
 
 Options:
 
-    panelId - String - Default: null
+    panelId - String - Default: The ID of the first panel in the tabbler
     Set the ID of the panel the tabbler should open to.
 
 Example:
