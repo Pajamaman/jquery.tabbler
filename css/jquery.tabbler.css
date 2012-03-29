@@ -1,28 +1,32 @@
-.tabbler.tabList
+.tabbler
+{
+	overflow: hidden;
+}
+.tabbler-tabList
 {
 	margin-bottom: 0;
 	margin-top: 0;
 	padding-left: 0;
 }
-.tabbler.tab
+.tabbler-tab
 {
 	background-color: #ccc;
 	display: inline-block;
 }
-.tabbler.tab.active
+.tabbler-tab.active
 {
 	background-color: #ffc;
 }
-.tabbler.tabLink
+.tabbler-tabLink
 {
 	display: inline-block;
 	padding: 0.5em;
 }
-.tabbler.panel
+.tabbler-panel
 {
 	background-color: #ffc;
 }
-.tabbler.wrapper
+.tabbler-wrapper
 {
 	padding: 1em;
 }

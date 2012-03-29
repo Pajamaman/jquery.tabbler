@@ -14,13 +14,13 @@
 			}, options);
 			
 			return this.each(function() {
-				var $tabbler = $(this);
+				var $tabbler = $(this).addClass("tabbler");
 				
-				var $tabList = $tabbler.children("ul").addClass("tabbler tabList");
+				var $tabList = $tabbler.children("ul").addClass("tabbler-tabList");
 				
-				var $tabs = $tabList.children("li").addClass("tabbler tab");
+				var $tabs = $tabList.children("li").addClass("tabbler-tab");
 				
-				var $tabLinks = $tabs.children("a").addClass("tabbler tabLink")
+				var $tabLinks = $tabs.children("a").addClass("tabbler-tabLink")
 					.click(function(e) {
 						e.preventDefault();
 						
@@ -29,8 +29,8 @@
 						});
 					});
 				
-				var $panels = $tabbler.children("div").addClass("tabbler panel")
-					.wrapInner("<div class='tabbler wrapper'>");
+				var $panels = $tabbler.children("div").addClass("tabbler-panel")
+					.wrapInner("<div class='tabbler-wrapper'>");
 				
 				if (settings.setHeight != false) {
 					var tabListHeightPx = $tabList.height();
@@ -72,11 +72,11 @@
 		},
 		open: function(options) {
 			var settings = $.extend({
-				panelId: $(this).find(".tabbler.panel").first().attr("id")
+				panelId: $(this).find(".tabbler-panel").first().attr("id")
 			}, options);
 			
 			return this.each(function() {
-				var $tab = $(this).find(".tabbler.tab").has("a[href='#" + settings.panelId + "']");
+				var $tab = $(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']");
 				
 				var $panel = $("#" + settings.panelId);
 				
@@ -92,9 +92,9 @@
 		},
 		close: function(callback) {
 			return this.each(function() {
-				var $tab = $(this).find(".tabbler.tab.active");
+				var $tab = $(this).find(".tabbler-tab.active");
 				
-				var $panel = $(this).find(".tabbler.panel:visible");
+				var $panel = $(this).find(".tabbler-panel:visible");
 				
 				$panel.slideUp("fast").promise().done(function() {
 					$tab.removeClass("active");
@@ -107,10 +107,10 @@
 		},
 		nextTab: function() {
 			return this.each(function() {
-				var panelId = $(this).find(".tabbler.panel:visible").next().attr("id");
+				var panelId = $(this).find(".tabbler-panel:visible").next().attr("id");
 				
 				if (panelId == null) {
-					panelId = $(this).find(".tabbler.panel").first().attr("id");
+					panelId = $(this).find(".tabbler-panel").first().attr("id");
 				}
 				
 				$(this).tabbler("open", {
