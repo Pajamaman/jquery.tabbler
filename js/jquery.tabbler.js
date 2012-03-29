@@ -99,7 +99,9 @@
 				$panel.slideUp("fast").promise().done(function() {
 					$tab.removeClass("active");
 					
-					callback.call();
+					if (typeof callback == "function") {
+						callback.call();
+					}
 				});
 			});
 		},
