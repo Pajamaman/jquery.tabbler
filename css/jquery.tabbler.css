@@ -1,4 +1,4 @@
-.tabbler.tablist
+.tabbler.tabList
 {
 	margin-bottom: 0;
 	margin-top: 0;
@@ -13,7 +13,7 @@
 {
 	background-color: #ffc;
 }
-.tabbler.tab a
+.tabbler.tabLink
 {
 	display: inline-block;
 	padding: 0.5em;
@@ -22,7 +22,7 @@
 {
 	background-color: #ffc;
 }
-.tabbler.panel.inner
+.tabbler.wrapper
 {
 	padding: 1em;
 }

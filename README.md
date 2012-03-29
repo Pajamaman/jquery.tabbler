@@ -37,6 +37,37 @@ A call to:
 
 will initialize a tabbler instance.
 
+### Options
+
+#### open - String - Default: null
+Set whether or not the tabbler should open to the panel with the specified ID when the page loads.
+
+Example:
+
+    $("#tabs").tabbler({ open: "tabs-1" });
+
+### Methods
+
+#### open - .tabbler("open", options)
+Opens the tabbler to the panel with the specified ID.
+
+Options:
+
+    panelId - String - Default: null
+    Set the ID of the panel the tabbler should open to.
+
+Example:
+
+    $("#tabs").tabbler("open", { panelId: "tabs-1" });
+
+#### close - .tabbler("close")
+Closes the tabbler.
+
+Example:
+
+    $("#tabs").tabbler("close");
+
 ### To do
 
 * Add alternate animation effects, such as slide in from the left or right, or fade in and out
+* Add option to loop through the tabs like a slideshow
