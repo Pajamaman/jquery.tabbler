@@ -10,7 +10,8 @@
 				panelId: null,
 				play: false,
 				playSpeed: 5000,
-				pauseHover: false
+				pauseHover: false,
+				effect: "vertical"
 			}, options);
 			
 			return this.each(function() {
@@ -25,14 +26,15 @@
 						e.preventDefault();
 						
 						$tabbler.tabbler("open", {
-							panelId: $(this).attr("href").replace("#", "")
+							panelId: $(this).attr("href").replace("#", ""),
+							effect: settings.effect
 						});
 					});
 				
 				var $panels = $tabbler.children("div").addClass("tabbler-panel")
 					.wrapInner("<div class='tabbler-wrapper'>");
 				
-				if (settings.setHeight != false) {
+				if (settings.setHeight == true) {
 					var tabListHeightPx = $tabList.height();
 					var maxPanelHeightPx = 0;
 					
@@ -52,18 +54,22 @@
 				$tabs.has("a[href='#" + settings.panelId + "']").addClass("active");
 				$panels.not("#" + settings.panelId).hide();
 				
-				if (settings.play != false) {
+				if (settings.play == true) {
 					var interval = setInterval(function() {
-						$tabbler.tabbler("nextTab");
+						$tabbler.tabbler("nextTab", {
+							effect: settings.effect
+						});
 					}, settings.playSpeed);
 					
-					if (settings.pauseHover != false) {
+					if (settings.pauseHover == true) {
 						$tabbler.hover(function() {
 							clearInterval(interval);
 						},
 						function() {
 							interval = setInterval(function() {
-								$tabbler.tabbler("nextTab");
+								$tabbler.tabbler("nextTab", {
+									effect: settings.effect
+								});
 							}, settings.playSpeed);
 						});
 					}
@@ -72,7 +78,8 @@
 		},
 		open: function(options) {
 			var settings = $.extend({
-				panelId: $(this).find(".tabbler-panel").first().attr("id")
+				panelId: $(this).find(".tabbler-panel").first().attr("id"),
+				effect: "vertical"
 			}, options);
 			
 			return this.each(function() {
@@ -81,16 +88,24 @@
 				var $panel = $("#" + settings.panelId);
 				
 				if ($panel.is(":visible")) {
-					$(this).tabbler("close");
+					$(this).tabbler("close", {
+						effect: settings.effect
+					});
 				} else {
-					$(this).tabbler("close", function() {
+					$(this).tabbler("close", {
+						effect: settings.effect
+					}, function() {
 						$tab.addClass("active");
 						$panel.slideDown("fast");
 					});
 				}
 			});
 		},
-		close: function(callback) {
+		close: function(options, callback) {
+			var settings = $.extend({
+				effect: "vertical"
+			}, options);
+			
 			return this.each(function() {
 				var $tab = $(this).find(".tabbler-tab.active");
 				
@@ -105,7 +120,11 @@
 				});
 			});
 		},
-		nextTab: function() {
+		nextTab: function(options) {
+			var settings = $.extend({
+				effect: "vertical"
+			}, options);
+			
 			return this.each(function() {
 				var panelId = $(this).find(".tabbler-panel:visible").next().attr("id");
 				
@@ -114,7 +133,8 @@
 				}
 				
 				$(this).tabbler("open", {
-					panelId: panelId
+					panelId: panelId,
+					effect: settings.effect
 				});
 			});
 		}
