@@ -102,4 +102,4 @@ Example:
 ### To do
 
 * Add alternate animation effects, such as slide in from the left or right, or fade in and out
-* Add option to loop through the tabs like a slideshow
+* Add methods to pause the play() method or to advance manually
