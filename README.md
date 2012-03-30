@@ -40,7 +40,7 @@ will initialize a tabbler instance.
 ### Options
 
 #### setHeight - Boolean - Default: false
-Set whether or not the tabbler height should remain constant when it is opened or closed.
+Set whether or not the tabbler height should remain constant when the active tab changes.
 
 Example:
 
@@ -52,6 +52,13 @@ Set whether or not the tabbler should open to the panel with the specified ID wh
 Example:
 
     $("#tabs").tabbler({ panelId: "tabs-1" });
+
+#### effect - String - Default: "toggle"
+Set the effect the tabbler should use when the active tab changes.
+
+Example:
+
+    $("#tabs").tabbler({ effect: "slide" });
 
 #### play - Boolean - Default: false
 Set whether or not the tabbler should automatically advance through the panels.
@@ -76,43 +83,14 @@ Example:
 
 ### Methods
 
-#### open - .tabbler("open", options)
-Opens the tabbler to the panel with the specified ID.
-
-Options:
-
-    panelId - String - Default: The ID of the first panel in the tabbler
-    Set the ID of the panel the tabbler should open to.
-
-Example:
-
-    $("#tabs").tabbler("open", { panelId: "tabs-1" });
-
-#### close - .tabbler("close")
-Closes the tabbler.
-
-Options:
-
-    There are no options for this method. It does however accept a callback function.
-
-Example:
-
-    $("#tabs").tabbler("close", function() {
-        // Callback
-    });
-
-#### nextTab - .tabbler("nextTab")
-Opens the tabbler to the first panel following the panel that is currently opened, or to the first panel in the tabbler if the panel that is currently opened is the last panel.
-
-Options:
-
-    There are no options for this method.
-
-Example:
-
-    $("#tabs").tabbler("nextTab");
+setHeight()
+autoOpen()
+toggle()
+slide()
+play()
 
 ### To do
 
-* Make slide effect continuous
 * Add prevTab() method
+* Finish writing the documentation
+* Fix bug where a tabbler using the slide method must have setHeight and panelId options set to something other than their default values
