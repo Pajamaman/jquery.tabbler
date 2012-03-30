@@ -4,7 +4,7 @@
 
 ### Overview
 
-A tabbler is a list of tabs that each correspond to a content area, called a panel. Clicking on a tab toggles the visibility of the corresponding panel, along with any sibling panels.
+A tabbler is a list of tabs followed by a series of panels. Clicking on a tab changes the active panel to the corresponding panel of the tab, set by its href attribute.
 
 The HTML should look something like this:
 
@@ -40,7 +40,7 @@ will initialize a tabbler instance.
 ### Options
 
 #### setHeight - Boolean - Default: false
-Set whether or not the tabbler height should remain constant when the active tab changes.
+Set whether or not the tabbler height should remain constant when the active panel changes.
 
 Example:
 
@@ -54,43 +54,88 @@ Example:
     $("#tabs").tabbler({ panelId: "tabs-1" });
 
 #### effect - String - Default: "toggle"
-Set the effect the tabbler should use when the active tab changes.
+Set the animation effect the tabbler should use when the active panel changes. Note: The setHeight option should be set to true when this option is set to slide.
 
 Example:
 
-    $("#tabs").tabbler({ effect: "slide" });
+    $("#tabs").tabbler({ effect: "slide", setHeight: true });
 
 #### play - Boolean - Default: false
 Set whether or not the tabbler should automatically advance through the panels.
 
 Example:
 
-    $("#tabs").tabbler({ panelId: "tabs-1", play: true });
+    $("#tabs").tabbler({ play: true });
 
 #### playSpeed - Integer - Default: 5000
 Set the frequency that the tabbler should automatically advance through the panels when the play option is set to true.
 
 Example:
 
-    $("#tabs").tabbler({ panelId: "tabs-1", play: true, playSpeed: 2000 });
+    $("#tabs").tabbler({ play: true, playSpeed: 2000 });
 
 #### pauseHover - Boolean - Default: false
 Set whether or not the tabbler should pause when the mouse cursor hovers over it and the play option is set to true.
 
 Example:
 
-    $("#tabs").tabbler({ panelId: "tabs-1", play: true, pauseHover: true });
+    $("#tabs").tabbler({ play: true, pauseHover: true });
 
 ### Methods
 
-setHeight()
-autoOpen()
-toggle()
-slide()
-play()
+#### setHeight
+Sets the height of the tabbler to the height of its tallest panel.
+
+Example:
+
+    $("#tabs").tabbler("setHeight");
+
+#### setActive
+Adds the active class to the panel with the specified ID and its corresponding tab.
+
+Options:
+
+* panelId - String - Default: The ID of the first panel in the tabbler
+
+Example:
+
+    $("#tabs").tabbler("setActive", { panelId: "tabs-1" });
+
+#### toggle
+Changes the active panel to the panel with the specified ID using the toggle effect.
+
+Options:
+
+* panelId - String - Default: The ID of the first inactive panel in the tabbler following the currently active panel, or the first panel in the tabbler if there is no currently active panel.
+
+Example:
+
+    $("#tabs").tabbler("toggle", { panelId: "tabs-1" });
+
+#### slide
+Changes the active panel to the panel with the specified ID using the slide effect.
+
+Options:
+
+* panelId - String - Default: The ID of the first inactive panel in the tabbler following the currently active panel, or the first panel in the tabbler if there is no currently active panel.
+
+Example:
+
+    $("#tabs").tabbler("slide", { panelId: "tabs-1" });
+
+#### play
+Causes the tabbler to automatically advance through the panels.
+
+Options:
+
+* effect - String - Default: "toggle"
+* playSpeed - Integer - Default: 5000
+* pauseHover - Boolean - Default: false
+
+Example:
+
+    $("#tabs").tabbler("play", { effect: "slide", playSpeed: 2000, pauseHover: true });
 
 ### To do
 
-* Add prevTab() method
-* Finish writing the documentation
-* Fix bug where a tabbler using the slide method must have setHeight and panelId options set to something other than their default values
+* Bug: The setHeight option should be set to true when this option is set to slide. Otherwise, any inactive panels will still take up a bunch of space on the page.
