@@ -40,42 +40,42 @@ will initialize a tabbler instance.
 ### Options
 
 #### setHeight - Boolean - Default: false
-Set whether or not the tabbler height should remain constant when the active panel changes.
+If this option is set to true, the tabbler height will remain constant when the active panel changes.
 
 Example:
 
     $("#tabs").tabbler({ setHeight: true });
 
 #### panelId - String - Default: null
-Set whether or not the tabbler should open to the panel with the specified ID when the page loads.
+If this option is set, the tabbler will open to the panel with the specified ID when the page loads.
 
 Example:
 
     $("#tabs").tabbler({ panelId: "tabs-1" });
 
 #### effect - String - Default: "toggle"
-Set the animation effect the tabbler should use when the active panel changes. Note: The setHeight option should be set to true when this option is set to slide.
+The animation effect that the tabbler should use when the active panel changes. Note: The setHeight option should be set to true when this option is set to slide.
 
 Example:
 
     $("#tabs").tabbler({ effect: "slide", setHeight: true });
 
 #### play - Boolean - Default: false
-Set whether or not the tabbler should automatically advance through the panels.
+If this option is set to true, the tabbler will automatically advance through the panels.
 
 Example:
 
     $("#tabs").tabbler({ play: true });
 
 #### playSpeed - Integer - Default: 5000
-Set the frequency that the tabbler should automatically advance through the panels when the play option is set to true.
+The frequency with which the tabbler should automatically advance through the panels when the play option is set to true.
 
 Example:
 
     $("#tabs").tabbler({ play: true, playSpeed: 2000 });
 
 #### pauseHover - Boolean - Default: false
-Set whether or not the tabbler should pause when the mouse cursor hovers over it and the play option is set to true.
+If this option is set to true, the tabbler will pause when the mouse cursor hovers over it and the play option is set to true.
 
 Example:
 
@@ -138,4 +138,8 @@ Example:
 
 ### To do
 
-* Bug: The setHeight option should be set to true when this option is set to slide. Otherwise, any inactive panels will still take up a bunch of space on the page.
+* Add an option to allow the tabbler to overlap page contents instead of shifting them vertically when the active panel changes.
+
+### Issues
+
+* The setHeight option should be set to true when the effect option is set to slide. Otherwise, the tabbler height will be equal to the sum of the heights of the panels.
