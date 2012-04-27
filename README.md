@@ -39,7 +39,7 @@ will initialize a tabbler instance.
 
 ### Options
 
-### event - String - Default: "click"
+#### event - String - Default: "click"
 The event that causes the active tab to change. Possible values are "click" or "mouseover."
 
 Example:
