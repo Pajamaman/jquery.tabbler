@@ -44,7 +44,7 @@ The event that causes the active tab to change. Possible values are "click" or "
 
 Example:
 
-    $("#tabs").tabbler({ effect: "mouseover" });
+    $("#tabs").tabbler({ event: "mouseover" });
 
 #### effect - String - Default: "toggle"
 The animation effect that occurs when the active tab changes. Possible values are "toggle" or "slide."
@@ -131,6 +131,10 @@ Causes the tabbler to advance to the next inactive panel.
 Options:
 
 * effect - String - Default: "toggle"
+
+Example:
+
+    $("#tabs").tabbler("nextTab", { effect: "slide" });
 
 ### Credits
 
