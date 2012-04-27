@@ -2,26 +2,13 @@
 <html>
 	<head>
 		<title>jquery.tabbler</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script src="js/jquery.tabbler.js"></script>
-		<script>
-			$(function() {
-				$("#tabs").tabbler();
-				$("#more-tabs").tabbler({
-					setHeight: true,
-					panelId: "more-tabs-1"
-				});
-				$("#even-more-tabs").tabbler({
-					setHeight: true,
-					panelId: "even-more-tabs-1",
-					effect: "slide",
-					play: true,
-					playSpeed: 2000,
-					pauseHover: true
-				});
-			});
-		</script>
 		<link href="css/jquery.tabbler.css" rel="stylesheet" />
+        <style>
+            #even-more-tabs
+            {
+                display: inline-block;
+            }
+        </style>
 	</head>
 	<body>
 		<h1>
@@ -123,29 +110,33 @@
 				</li>
 			</ul>
 			<div id="even-more-tabs-1">
-				<h3>
-					Tab 1
-				</h3>
-				<p>
-					Lorizzle fizzle dolor the bizzle amizzle, consectetuer adipiscing things. Nullam sapizzle velit, mammasay mammasa mamma oo sa volutpizzle, yo mah nizzle, gravida vizzle, arcu.
-				</p>
+				<img src="img/even-more-tabs-1.jpg" />
 			</div>
 			<div id="even-more-tabs-2">
-				<h3>
-					Tab 2
-				</h3>
-				<p>
-					Mammasay mammasa mamma oo sa check out this tortor. Sed eros. We gonna chung we gonna chung dolor dapibus turpizzle tempizzle go to hizzle.
-				</p>
+				<img src="img/even-more-tabs-2.jpg" />
 			</div>
 			<div id="even-more-tabs-3">
-				<h3>
-					Tab 3
-				</h3>
-				<p>
-					Mauris crackalackin nibh et turpis. Tellivizzle izzle tortizzle. Pellentesque eleifend rhoncizzle shut the shizzle up. In own yo' habitasse platea dictumst.
-				</p>
+				<img src="img/even-more-tabs-3.jpg" />
 			</div>
 		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="js/jquery.tabbler.js"></script>
+		<script>
+			$(function() {
+				$("#tabs").tabbler();
+				$("#more-tabs").tabbler({
+					setHeight: true,
+					panelId: "more-tabs-1"
+				});
+				$("#even-more-tabs").tabbler({
+					setHeight: true,
+					panelId: "even-more-tabs-1",
+					effect: "slide",
+					play: true,
+					playSpeed: 2000,
+					pauseHover: true
+				});
+			});
+		</script>
 	</body>
 </html>

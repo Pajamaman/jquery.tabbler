@@ -136,6 +136,10 @@ Example:
 
     $("#tabs").tabbler("play", { effect: "slide", playSpeed: 2000, pauseHover: true });
 
+### Credits
+
+High resolution textures provided by [CG Textures](http://www.cgtextures.com/).
+
 ### To do
 
 * Add an option to allow the tabbler to overlap page contents instead of shifting them vertically when the active panel changes.
