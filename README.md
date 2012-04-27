@@ -4,7 +4,7 @@
 
 ### Overview
 
-A tabbler is a list of tabs followed by a series of panels. Clicking on a tab changes the active panel to the corresponding panel of the tab, set by its href attribute.
+A tabbler is a list of tabs followed by a series of panels. Clicking on or hovering over a tab activates the tab and its associated panel. If a tab is activated while another tab is active, the active tab becomes inactive along with its associated panel.
 
 The HTML should look something like this:
 
@@ -39,43 +39,50 @@ will initialize a tabbler instance.
 
 ### Options
 
-#### setHeight - Boolean - Default: false
-If this option is set to true, the tabbler height will remain constant when the active panel changes.
+### event - String - Default: "click"
+The event that causes the active tab to change. Possible values are "click" or "mouseover."
 
 Example:
 
-    $("#tabs").tabbler({ setHeight: true });
-
-#### panelId - String - Default: null
-If this option is set, the tabbler will open to the panel with the specified ID when the page loads.
-
-Example:
-
-    $("#tabs").tabbler({ panelId: "tabs-1" });
+    $("#tabs").tabbler({ effect: "mouseover" });
 
 #### effect - String - Default: "toggle"
-The animation effect that the tabbler should use when the active panel changes. Note: The setHeight option should be set to true when this option is set to slide.
+The animation effect that occurs when the active tab changes. Possible values are "toggle" or "slide."
 
 Example:
 
-    $("#tabs").tabbler({ effect: "slide", setHeight: true });
+    $("#tabs").tabbler({ effect: "slide" });
+
+#### floating - Boolean - Default: false
+If this option is set to true, the active panel will float over the contents of the page. If set to false, the contents of the page will be shifted vertically to make room for the active panel.
+
+Example:
+
+    $("#tabs").tabbler({ floating: true });
+
+#### selected - String - Default: null
+If this option is set, the active panel will be set to the panel with the specified ID when the page loads along with its associated tab.
+
+Example:
+
+    $("#tabs").tabbler({ selected: "tabs-1" });
 
 #### play - Boolean - Default: false
-If this option is set to true, the tabbler will automatically advance through the panels.
+If this option is set to true, the active tab will automatically change at the interval set by the playSpeed option.
 
 Example:
 
     $("#tabs").tabbler({ play: true });
 
 #### playSpeed - Integer - Default: 5000
-The frequency with which the tabbler should automatically advance through the panels when the play option is set to true.
+The frequency with which the active tab automatically changes when the play option is set to true.
 
 Example:
 
     $("#tabs").tabbler({ play: true, playSpeed: 2000 });
 
 #### pauseHover - Boolean - Default: false
-If this option is set to true, the tabbler will pause when the mouse cursor hovers over it and the play option is set to true.
+If this option is set to true, the active tab will not automatically change while the user's cursor is hovering over the tabbler when the play option is set to true.
 
 Example:
 
@@ -83,30 +90,12 @@ Example:
 
 ### Methods
 
-#### setHeight
-Sets the height of the tabbler to the height of its tallest panel.
-
-Example:
-
-    $("#tabs").tabbler("setHeight");
-
-#### setActive
-Adds the active class to the panel with the specified ID and its corresponding tab.
-
-Options:
-
-* panelId - String - Default: The ID of the first panel in the tabbler
-
-Example:
-
-    $("#tabs").tabbler("setActive", { panelId: "tabs-1" });
-
 #### toggle
 Changes the active panel to the panel with the specified ID using the toggle effect.
 
 Options:
 
-* panelId - String - Default: The ID of the first inactive panel in the tabbler following the currently active panel, or the first panel in the tabbler if there is no currently active panel.
+* panelId - String - Default: null
 
 Example:
 
@@ -117,7 +106,7 @@ Changes the active panel to the panel with the specified ID using the slide effe
 
 Options:
 
-* panelId - String - Default: The ID of the first inactive panel in the tabbler following the currently active panel, or the first panel in the tabbler if there is no currently active panel.
+* panelId - String - Default: null
 
 Example:
 
@@ -136,14 +125,13 @@ Example:
 
     $("#tabs").tabbler("play", { effect: "slide", playSpeed: 2000, pauseHover: true });
 
+#### nextTab
+Causes the tabbler to advance to the next inactive panel.
+
+Options:
+
+* effect - String - Default: "toggle"
+
 ### Credits
 
 High resolution textures provided by [CG Textures](http://www.cgtextures.com/).
-
-### To do
-
-* Add an option to allow the tabbler to overlap page contents instead of shifting them vertically when the active panel changes.
-
-### Issues
-
-* The setHeight option should be set to true when the effect option is set to slide. Otherwise, the tabbler height will be equal to the sum of the heights of the panels.

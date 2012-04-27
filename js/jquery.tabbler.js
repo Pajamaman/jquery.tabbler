@@ -6,52 +6,91 @@
 	var methods = {
 		init: function(options) {
 			var settings = $.extend({
-				setHeight: false,
-				panelId: null,
+                event: "click",
 				effect: "toggle",
+                floating: false,
+				selected: null,
 				play: false,
 				playSpeed: 5000,
 				pauseHover: false
 			}, options);
 			
 			return this.each(function() {
-				var $tabbler = $(this).addClass("tabbler")
-					.css("overflow", "hidden");
+				var $tabbler = $(this).addClass("tabbler");
 				
 				var $tabList = $tabbler.children("ul").addClass("tabbler-tabList");
 				
 				var $tabs = $tabList.children("li").addClass("tabbler-tab");
 				
-				var $tabLinks = $tabs.children("a").addClass("tabbler-tabLink")
-					.click(function(e) {
-						e.preventDefault();
-						
-						$tabbler.tabbler(settings.effect, {
-							panelId: $(this).attr("href").replace("#", "")
-						});
-					});
-				
+                var $tabLinks = $tabs.children("a").addClass("tabbler-tabLink");
+                
 				var $panels = $tabbler.children("div").addClass("tabbler-panel")
-					.wrapInner("<div class='tabbler-wrapper'>")
-					.css("position", "relative");
+					.wrapInner("<div class='tabbler-wrapper'>");
 				
-				if (settings.setHeight) {
-					$tabbler.tabbler("setHeight");
-				}
+                if (settings.event == "click") {
+                    $tabLinks.click(function(e) {
+                        e.preventDefault();
+                        
+                        $tabbler.tabbler(settings.effect, {
+                            panelId: $(this).attr("href").replace("#", "")
+                        });
+                    });
+                } else if (settings.event == "mouseover") {
+                    $tabLinks.mouseenter(function() {
+                        $tabbler.tabbler(settings.effect, {
+                            panelId: $(this).attr("href").replace("#", "")
+                        });
+                    });
+                    
+                    $tabbler.mouseleave(function() {
+                        $tabbler.tabbler(settings.effect, {
+                            panelId: $(this).find(".tabbler-panel.active").attr("id")
+                        });
+                    });
+                }
 				
-				if (settings.panelId) {
-					$tabbler.tabbler("setActive", {
-						panelId: settings.panelId
-					});
+				if (settings.selected) {
+                    $(this).find(".tabbler-tab").has("a[href='#" + settings.selected + "']").addClass("active");
+                    $("#" + settings.selected).addClass("active");
 				}
 				
 				if (settings.effect === "toggle") {
-					$panels.not("#" + settings.panelId).hide();
+                    if (settings.floating) {
+                        $tabbler.css("position", "relative");
+                        
+                        $panels.css({
+                            position: "absolute",
+                            width: "100%",
+                            "z-index": 100
+                        });
+                    }
+                    
+					$panels.not("#" + settings.selected).hide();
 				} else if (settings.effect === "slide") {
-					$panels.not("#" + settings.panelId).offset({
-						top: $tabList.height() + $tabList.offset().top,
-						left: $tabList.width() + $tabList.offset().left
-					});
+                    var tabListHeightPx = $tabList.height();
+                    var maxPanelHeightPx = 0;
+                    
+                    $panels.each(function() {
+                        if ($(this).height() > maxPanelHeightPx) {
+                            maxPanelHeightPx = $(this).height();
+                        }
+                    });
+                    
+                    var maxHeightPx = tabListHeightPx + maxPanelHeightPx;
+                    var fontHeightPx = $(this).css("font-size").replace("px", "");
+                    var maxHeightEm = maxHeightPx / fontHeightPx;
+                    
+					$tabbler.css({
+                        overflow: "hidden",
+                        height: maxHeightEm + "em"
+                    });
+                    
+					$panels.css("position", "relative")
+                        .not("#" + settings.selected)
+                            .offset({
+                                top: $tabList.height() + $tabList.offset().top,
+                                left: $tabList.width() + $tabList.offset().left
+                            });
 				}
 				
 				if (settings.play) {
@@ -63,45 +102,14 @@
 				}
 			});
 		},
-		setHeight: function() {
-			return this.each(function() {
-				var $tabList = $(this).find(".tabbler-tabList");
-				var $panels = $(this).find(".tabbler-panel");
-				
-				var tabListHeightPx = $tabList.height();
-				var maxPanelHeightPx = 0;
-				
-				$panels.each(function() {
-					if ($(this).height() > maxPanelHeightPx) {
-						maxPanelHeightPx = $(this).height();
-					}
-				});
-				
-				var maxHeightPx = tabListHeightPx + maxPanelHeightPx;
-				var fontHeightPx = $(this).css("font-size").replace("px", "");
-				var maxHeightEm = maxHeightPx / fontHeightPx;
-				
-				$(this).height(maxHeightEm + "em");
-			});
-		},
-		setActive: function(options) {
-			var settings = $.extend({
-				panelId: $(this).find(".tabbler-panel").first().attr("id")
-			}, options);
-			
-			return this.each(function() {
-				$(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']").addClass("active");
-				$("#" + settings.panelId).addClass("active");
-			});
-		},
 		toggle: function(options) {
 			var settings = $.extend({
-				panelId: $(this).find(".tabbler-panel.active").next().attr("id")
+				panelId: null
 			}, options);
 			
 			return this.each(function() {
 				if (!settings.panelId) {
-					settings.panelId = $(this).find(".tabbler-panel").first().attr("id");
+					return false;
 				}
 				
 				var $activeTab = $(this).find(".tabbler-tab.active");
@@ -121,12 +129,12 @@
 		},
 		slide: function(options) {
 			var settings = $.extend({
-				panelId: $(this).find(".tabbler-panel.active").next().attr("id")
+				panelId: null
 			}, options);
 			
 			return this.each(function() {
 				if (!settings.panelId) {
-					settings.panelId = $(this).find(".tabbler-panel").first().attr("id");
+					return false;
 				}
 				
 				var $activeTab = $(this).find(".tabbler-tab.active");
@@ -163,21 +171,43 @@
 			return this.each(function() {
 				var $tabbler = $(this);
 				
-				var interval = setInterval(function() {
-					$tabbler.tabbler(settings.effect);
-				}, settings.playSpeed);
+				var interval = setTimer();
 				
 				if (settings.pauseHover) {
 					$tabbler.hover(function() {
 						clearInterval(interval);
 					}, function() {
-						interval = setInterval(function() {
-							$tabbler.tabbler(settings.effect);
-						}, settings.playSpeed);
+						interval = setTimer();
 					});
 				}
+                
+                function setTimer()
+                {
+                    return setInterval(function() {
+                        $tabbler.tabbler("nextTab", {
+                            effect: settings.effect
+                        });
+                    }, settings.playSpeed);
+                }
 			});
-		}
+		},
+        nextTab: function(options) {
+            var settings = $.extend({
+                effect: "toggle"
+            }, options);
+            
+            return this.each(function() {
+				var panelId = $(this).find(".tabbler-panel.active").next().attr("id");
+                
+				if (!panelId) {
+					panelId = $(this).find(".tabbler-panel").first().attr("id");
+				}
+                
+                $(this).tabbler(settings.effect, {
+                    panelId: panelId
+                });
+            });
+        }
 	};
 	
 	$.fn.tabbler = function(method) {
