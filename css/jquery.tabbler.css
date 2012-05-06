@@ -3,33 +3,39 @@
 }
 .tabbler-tabList
 {
-	margin-bottom: 0;
-	margin-top: 0;
-	padding-left: 0;
+    margin: 0;
+    padding: 0;
 }
 .tabbler-tab
 {
-	background-color: #ccc;
-	display: inline-block;
+    background-color: #ccc;
+    display: inline-block;
 }
 .tabbler-tab.active
 {
-	background-color: #ffc;
+    background-color: #ffc;
 }
 .tabbler-tabLink
 {
-	display: inline-block;
-	padding: 0.5em;
+    display: inline-block;
+    padding: 0.5em;
 }
 .tabbler-panel
 {
-	background-color: #ccc;
+    background-color: #ccc;
 }
 .tabbler-panel.active
 {
-	background-color: #ffc;
+    background-color: #ffc;
 }
 .tabbler-wrapper
 {
-	padding: 1em;
+    padding: 1em;
+}
+
+/* http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ */
+.ie7 .tabbler-tab
+{
+    display: inline;
+    margin-right: 0.25em;
 }

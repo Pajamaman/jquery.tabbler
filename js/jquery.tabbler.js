@@ -16,18 +16,13 @@
             }, options);
             
             return this.each(function() {
-                var $tabbler = $(this).addClass("tabbler");
+                var $tabbler = $(this).addClass("tabbler").css("position", "relative"),
+                    $tabList = $tabbler.children("ul").addClass("tabbler-tabList"),
+                    $tabs = $tabList.children("li").addClass("tabbler-tab"),
+                    $tabLinks = $tabs.children("a").addClass("tabbler-tabLink"),
+                    $panels = $tabbler.children("div").addClass("tabbler-panel").wrapInner("<div class='tabbler-wrapper'>");
                 
-                var $tabList = $tabbler.children("ul").addClass("tabbler-tabList");
-                
-                var $tabs = $tabList.children("li").addClass("tabbler-tab");
-                
-                var $tabLinks = $tabs.children("a").addClass("tabbler-tabLink");
-                
-                var $panels = $tabbler.children("div").addClass("tabbler-panel")
-                    .wrapInner("<div class='tabbler-wrapper'>");
-                
-                if (settings.event == "click") {
+                if (settings.event === "click") {
                     $tabLinks.click(function(e) {
                         e.preventDefault();
                         
@@ -35,7 +30,7 @@
                             panelId: $(this).attr("href").replace("#", "")
                         });
                     });
-                } else if (settings.event == "mouseover") {
+                } else if (settings.event === "mouseover") {
                     $tabLinks.mouseenter(function() {
                         $tabbler.tabbler(settings.effect, {
                             panelId: $(this).attr("href").replace("#", "")
@@ -56,19 +51,21 @@
                 
                 if (settings.effect === "toggle") {
                     if (settings.floating) {
-                        $tabbler.css("position", "relative");
+                        $tabbler.css("z-index", "100");
                         
                         $panels.css({
                             position: "absolute",
-                            width: "100%",
-                            "z-index": 100
+                            width: "100%"
                         });
                     }
                     
                     $panels.not("#" + settings.selected).hide();
                 } else if (settings.effect === "slide") {
-                    var tabListHeightPx = $tabList.height();
-                    var maxPanelHeightPx = 0;
+                    var tabListHeightPx = $tabList.height(),
+                        maxPanelHeightPx = 0,
+                        maxHeightPx,
+                        fontHeightPx,
+                        maxHeightEm;
                     
                     $panels.each(function() {
                         if ($(this).height() > maxPanelHeightPx) {
@@ -76,9 +73,9 @@
                         }
                     });
                     
-                    var maxHeightPx = tabListHeightPx + maxPanelHeightPx;
-                    var fontHeightPx = $(this).css("font-size").replace("px", "");
-                    var maxHeightEm = maxHeightPx / fontHeightPx;
+                    maxHeightPx = tabListHeightPx + maxPanelHeightPx,
+                    fontHeightPx = $(this).css("font-size").replace("px", ""),
+                    maxHeightEm = maxHeightPx / fontHeightPx;
                     
                     $tabbler.css({
                         overflow: "hidden",
@@ -112,11 +109,10 @@
                     return false;
                 }
                 
-                var $activeTab = $(this).find(".tabbler-tab.active");
-                var $activePanel = $(this).find(".tabbler-panel.active");
-                
-                var $tab = $(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']").not(".active");
-                var $panel = $("#" + settings.panelId).not(".active");
+                var $activeTab = $(this).find(".tabbler-tab.active"),
+                    $activePanel = $(this).find(".tabbler-panel.active"),
+                    $tab = $(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']").not(".active");
+                    $panel = $("#" + settings.panelId).not(".active");
                 
                 $activePanel.slideUp("fast").promise().done(function() {
                     $(this).removeClass("active");
@@ -137,11 +133,11 @@
                     return false;
                 }
                 
-                var $activeTab = $(this).find(".tabbler-tab.active");
-                var $activePanel = $(this).find(".tabbler-panel.active");
-                
-                var $tab = $(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']").not(".active");
-                var $panel = $("#" + settings.panelId).not(".active");
+                var $activeTab = $(this).find(".tabbler-tab.active"),
+                    $activePanel = $(this).find(".tabbler-panel.active"),
+                    $tab = $(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']").not(".active"),
+                    $panel = $("#" + settings.panelId).not(".active"),
+                    $tabList = $(this).find(".tabbler-tabList");
                 
                 $activeTab.removeClass("active");
                 $activePanel.animate({
@@ -149,8 +145,6 @@
                 }, function() {
                     $(this).removeClass("active");
                 });
-                
-                var $tabList = $(this).find(".tabbler-tabList");
                 
                 $tab.addClass("active");
                 $panel.addClass("active").offset({
@@ -169,9 +163,8 @@
             }, options);
             
             return this.each(function() {
-                var $tabbler = $(this);
-                
-                var interval = setTimer();
+                var $tabbler = $(this),
+                    interval = setTimer();
                 
                 if (settings.pauseHover) {
                     $tabbler.hover(function() {
