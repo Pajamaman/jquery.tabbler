@@ -31,6 +31,10 @@
                         });
                     });
                 } else if (settings.event === "mouseover") {
+                    $tabLinks.click(function(e) {
+                        e.preventDefault();
+                    });
+                    
                     $tabLinks.mouseenter(function() {
                         $tabbler.tabbler(settings.effect, {
                             panelId: $(this).attr("href").replace("#", "")
