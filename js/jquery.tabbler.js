@@ -8,6 +8,7 @@
             var settings = $.extend({
                 event: "click",
                 effect: "toggle",
+                attribute: "href",
                 floating: false,
                 selected: null,
                 play: false,
@@ -27,7 +28,8 @@
                         e.preventDefault();
                         
                         $tabbler.tabbler(settings.effect, {
-                            panelId: $(this).attr("href").replace("#", "")
+                            attribute: settings.attribute,
+                            panelId: $(this).attr(settings.attribute).replace("#", "")
                         });
                     });
                 } else if (settings.event === "mouseover") {
@@ -37,19 +39,21 @@
                     
                     $tabLinks.mouseenter(function() {
                         $tabbler.tabbler(settings.effect, {
-                            panelId: $(this).attr("href").replace("#", "")
+                            attribute: settings.attribute,
+                            panelId: $(this).attr(settings.attribute).replace("#", "")
                         });
                     });
                     
                     $tabbler.mouseleave(function() {
                         $tabbler.tabbler(settings.effect, {
+                            attribute: settings.attribute,
                             panelId: $(this).find(".tabbler-panel.active").attr("id")
                         });
                     });
                 }
                 
                 if (settings.selected) {
-                    $(this).find(".tabbler-tab").has("a[href='#" + settings.selected + "']").addClass("active");
+                    $(this).find(".tabbler-tab").has("a[" + settings.attribute + "='#" + settings.selected + "']").addClass("active");
                     $("#" + settings.selected).addClass("active");
                 }
                 
@@ -97,6 +101,7 @@
                 if (settings.play) {
                     $tabbler.tabbler("play", {
                         effect: settings.effect,
+                        attribute: settings.attribute,
                         playSpeed: settings.playSpeed,
                         pauseHover: settings.pauseHover
                     });
@@ -105,6 +110,7 @@
         },
         toggle: function(options) {
             var settings = $.extend({
+                attribute: "href",
                 panelId: null
             }, options);
             
@@ -115,7 +121,7 @@
                 
                 var $activeTab = $(this).find(".tabbler-tab.active"),
                     $activePanel = $(this).find(".tabbler-panel.active"),
-                    $tab = $(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']").not(".active");
+                    $tab = $(this).find(".tabbler-tab").has("a[" + settings.attribute + "='#" + settings.panelId + "']").not(".active");
                     $panel = $("#" + settings.panelId).not(".active");
                 
                 $activePanel.slideUp("fast").promise().done(function() {
@@ -129,6 +135,7 @@
         },
         slide: function(options) {
             var settings = $.extend({
+                attribute: "href",
                 panelId: null
             }, options);
             
@@ -139,7 +146,7 @@
                 
                 var $activeTab = $(this).find(".tabbler-tab.active"),
                     $activePanel = $(this).find(".tabbler-panel.active"),
-                    $tab = $(this).find(".tabbler-tab").has("a[href='#" + settings.panelId + "']").not(".active"),
+                    $tab = $(this).find(".tabbler-tab").has("a[" + settings.attribute + "='#" + settings.panelId + "']").not(".active"),
                     $panel = $("#" + settings.panelId).not(".active"),
                     $tabList = $(this).find(".tabbler-tabList");
                 
@@ -162,6 +169,7 @@
         play: function(options) {
             var settings = $.extend({
                 effect: "toggle",
+                attribute: "href",
                 playSpeed: 5000,
                 pauseHover: false
             }, options);
@@ -182,7 +190,8 @@
                 {
                     return setInterval(function() {
                         $tabbler.tabbler("nextTab", {
-                            effect: settings.effect
+                            effect: settings.effect,
+                            attribute: settings.attribute
                         });
                     }, settings.playSpeed);
                 }
@@ -190,7 +199,8 @@
         },
         nextTab: function(options) {
             var settings = $.extend({
-                effect: "toggle"
+                effect: "toggle",
+                attribute: "href"
             }, options);
             
             return this.each(function() {
@@ -201,6 +211,7 @@
                 }
                 
                 $(this).tabbler(settings.effect, {
+                    attribute: settings.attribute,
                     panelId: panelId
                 });
             });
