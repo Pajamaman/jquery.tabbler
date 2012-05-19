@@ -25,7 +25,9 @@
                 
                 if (settings.event === "click") {
                     $tabLinks.click(function(e) {
-                        e.preventDefault();
+                        if (settings.attribute === "href") {
+                            e.preventDefault();
+                        }
                         
                         $tabbler.tabbler(settings.effect, {
                             attribute: settings.attribute,
@@ -34,7 +36,9 @@
                     });
                 } else if (settings.event === "mouseover") {
                     $tabLinks.click(function(e) {
-                        e.preventDefault();
+                        if (settings.attribute === "href") {
+                            e.preventDefault();
+                        }
                     });
                     
                     $tabLinks.mouseenter(function() {
