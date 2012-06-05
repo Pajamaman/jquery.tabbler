@@ -58,7 +58,7 @@ The attribute of the link that contains the associated panel ID.
 
 Example:
 
-    $("#tabs").tabbler({ attribute: "target" });
+    $("#tabs").tabbler({ attribute: "title" });
 
 #### floating - Boolean - Default: false
 If this option is set to true, the active panel will float over the contents of the page. If set to false, the contents of the page will be shifted vertically to make room for the active panel.

@@ -64,13 +64,13 @@
         <div id="more-tabs">
             <ul>
                 <li>
-                    <a href="#" target="#more-tabs-1">Tab 1</a>
+                    <a href="#" title="#more-tabs-1">Tab 1</a>
                 </li>
                 <li>
-                    <a href="#" target="#more-tabs-2">Tab 2</a>
+                    <a href="#" title="#more-tabs-2">Tab 2</a>
                 </li>
                 <li>
-                    <a href="#" target="#more-tabs-3">Tab 3</a>
+                    <a href="#" title="#more-tabs-3">Tab 3</a>
                 </li>
             </ul>
             <div id="more-tabs-1">
@@ -132,7 +132,7 @@
                     floating: true
                 });
                 $("#more-tabs").tabbler({
-                    attribute: "target",
+                    attribute: "title",
                     selected: "more-tabs-1"
                 });
                 $("#even-more-tabs").tabbler({
