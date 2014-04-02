@@ -1,6 +1,4 @@
 # jquery.tabbler
-## by David Kennedy
-## http://daveden.wordpress.com
 
 ### Overview
 
